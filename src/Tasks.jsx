@@ -1,6 +1,16 @@
 import { ChevronRightIcon, TrashIcon } from "lucide-react";
+import { useNavigate } from "react-router-dom";
 
 function Tasks(props) {
+  const navigate = useNavigate();
+
+  function onSeeDetailsClick(task) {
+    const query = new URLSearchParams()
+    query.set('title', task.title);
+    query.set('description', task.description);
+    navigate(`/task?${query.toString()}`); 
+  }
+
   return (
     <ul>
       {props.tasks.map((task) => (
@@ -11,7 +21,7 @@ function Tasks(props) {
           >
             {task.title}
           </button>
-          <button>
+          <button onClick={() => onSeeDetailsClick(task)}>
             <ChevronRightIcon />
           </button>
           <button onClick={() => props.onDeleteTaskClick(task.id)}>
