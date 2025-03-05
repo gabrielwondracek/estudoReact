@@ -1,29 +1,10 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import AddTasks from "./AddTasks";
 import Tasks from "./Tasks";
 import {v4} from "uuid";
 
 function App() {
-  const [tasks, setTasks] = useState([
-    {
-      id: 1,
-      title: "ola",
-      description: "teste",
-      isCompleted: false,
-    },
-    {
-      id: 2,
-      title: "oi",
-      description: "teste",
-      isCompleted: false,
-    },
-    {
-      id: 3,
-      title: "tchau",
-      description: "teste",
-      isCompleted: false,
-    },
-  ]);
+  const [tasks, setTasks] = useState(JSON.parse(localStorage.getItem("tasks")) || []);
 
   function onTaskClick(taskId) {
     const newTasks = tasks.map((task) => {
@@ -51,6 +32,10 @@ function App() {
     };
     setTasks([...tasks, newTask]);
   }
+
+  useEffect(() => {
+    localStorage.setItem("tasks", JSON.stringify(tasks));
+  }, [tasks])
 
   return (
     <div className="w-screen h-screen bg-slate-500 flex justify-center p-6">
