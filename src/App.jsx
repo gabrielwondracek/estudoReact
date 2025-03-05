@@ -37,6 +37,19 @@ function App() {
     localStorage.setItem("tasks", JSON.stringify(tasks));
   }, [tasks])
 
+  //A API ABAIXO ESTA COMENTADA PARA NÃO CONFLITAR COM O LOCAL STORAGE
+  /*useEffect(() => {
+    const fetchTasks = async () => {
+      //CHAMAR A API
+      const response = await fetch('https://jsonplaceholder.typicode.com/todos?_limit=10'); 
+      //PEGAR OS DADOS DELA
+      const data = await response.json();
+      //ARMAZENAR ESSES DADOS
+      setTasks(data);
+    };
+    fetchTasks();
+  }, []);*/ 
+
   return (
     <div className="w-screen h-screen bg-slate-500 flex justify-center p-6">
       <div className="w-[500px] ">
